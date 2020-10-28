@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "projects": {
+    "thedoc": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/thedoc",
+      "sourceRoot": "apps/thedoc/src",
+      "prefix": "thestack",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/thedoc",
+            "index": "apps/thedoc/src/index.html",
+            "main": "apps/thedoc/src/main.ts",
+            "polyfills": "apps/thedoc/src/polyfills.ts",
+            "tsConfig": "apps/thedoc/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/thedoc/src/favicon.ico", "apps/thedoc/src/assets"],
+            "styles": ["apps/thedoc/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/thedoc/src/environments/environment.ts",
+                  "with": "apps/thedoc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "thedoc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "thedoc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "thedoc:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/thedoc/tsconfig.app.json",
+              "apps/thedoc/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/thedoc/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/thedoc/jest.config.js",
+            "tsConfig": "apps/thedoc/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/thedoc/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "thedoc-e2e": {
+      "root": "apps/thedoc-e2e",
+      "sourceRoot": "apps/thedoc-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/thedoc-e2e/cypress.json",
+            "tsConfig": "apps/thedoc-e2e/tsconfig.e2e.json",
+            "devServerTarget": "thedoc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "thedoc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/thedoc-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/thedoc-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "thedoc"
+}
