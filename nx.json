@@ -17,6 +17,15 @@
     "thedoc-e2e": {
       "tags": [],
       "implicitDependencies": ["thedoc"]
+    },
+    "chat": {
+      "tags": []
+    },
+    "shared-modules": {
+      "tags": []
+    },
+    "shared-services": {
+      "tags": []
     }
   }
 }

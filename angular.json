@@ -22,7 +22,10 @@
             "tsConfig": "apps/thedoc/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/thedoc/src/favicon.ico", "apps/thedoc/src/assets"],
-            "styles": ["apps/thedoc/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/thedoc/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -118,6 +121,102 @@
             "tsConfig": ["apps/thedoc-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/thedoc-e2e/**"]
           }
+        }
+      }
+    },
+    "chat": {
+      "projectType": "library",
+      "root": "libs/chat",
+      "sourceRoot": "libs/chat/src",
+      "prefix": "thestack",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/chat/tsconfig.lib.json",
+              "libs/chat/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/chat/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/chat/jest.config.js",
+            "tsConfig": "libs/chat/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/chat/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-modules": {
+      "projectType": "library",
+      "root": "libs/shared/modules",
+      "sourceRoot": "libs/shared/modules/src",
+      "prefix": "thestack",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/modules/tsconfig.lib.json",
+              "libs/shared/modules/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/modules/jest.config.js",
+            "tsConfig": "libs/shared/modules/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared/modules/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-services": {
+      "projectType": "library",
+      "root": "libs/shared/services",
+      "sourceRoot": "libs/shared/services/src",
+      "prefix": "thestack",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/services/tsconfig.lib.json",
+              "libs/shared/services/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/services/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/services/jest.config.js",
+            "tsConfig": "libs/shared/services/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared/services/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }

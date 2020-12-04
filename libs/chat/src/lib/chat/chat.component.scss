@@ -1,0 +1,16 @@
+:host {
+  flex: 1;
+  display: flex;
+  min-height: 100%;
+  & .chat {
+    flex: 1;
+    &__side-nav {
+      display: flex;
+      flex-direction: column;
+      & ::ng-deep .mat-drawer-inner-container {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
